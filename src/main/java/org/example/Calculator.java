@@ -8,7 +8,7 @@ public class Calculator {
        return a+b;
     }
 
-    public Integer divide(Integer a,Integer b){
+    public Integer divide(Integer a,Integer b) throws  Exception{
         if(a==null || b==null){
             return null;
         }

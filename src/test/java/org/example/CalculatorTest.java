@@ -49,10 +49,62 @@ class CalculatorTest {
     }
 
 
+
+    @Test
+    void divide() throws Exception {
+        // assertNull() and assertNotNull()
+        assertNull(calculator.divide(2,null));
+
+        assertNotNull(calculator.divide(2,3));
+
+        // assertEquals() and assertNotEquals()
+        assertEquals(1,calculator.divide(5,5));
+
+        assertNotEquals(90,calculator.divide(9,10));
+
+        // assertTrue() and assertFalse()
+        assertTrue(calculator.divide(2,3)<1);
+
+        assertFalse(calculator.divide(0,1)<-1);
+
+        // assertThrows and assertDoesNotThrow
+        assertThrows(Exception.class,()->calculator.divide(1,0));
+
+        assertDoesNotThrow(()->calculator.divide(1,10));
+    }
+
+    @Test
+    void array(){
+        // assertArrayEquals()
+        assertArrayEquals(new int[]{1,2,3},calculator.array());
+
+        // assertSame()
+        Calculator c1;
+        c1 = calculator;
+        assertSame(c1,calculator);
+
+        List<String> str1 = Arrays.asList("1","2");
+        List<String> str2 = Arrays.asList("1","2");
+        // assertLinesMatch()
+        assertLinesMatch(str1,str2);
+    }
+
+    @Test
+    void TimeOut(){
+        //  assertTimeout()
+        assertTimeout(Duration.ofMillis(10),()->calculator.add(1,2));
+            //Thread.sleep(1);
+
+    }
+
+
+    // maybe do it only for add ()
+    // ???
+    // ok to code like this like not using add()
     @ParameterizedTest
     @ValueSource(ints = {5,9})
     void addTestWithVS(int res){
-        assertEquals(res,calculator.add(res,0));
+        assertEquals(res,calculator.add(2,3));
     }
 
     @ParameterizedTest
@@ -76,60 +128,13 @@ class CalculatorTest {
         assertEquals(res,calculator.add(a,b));
     }
 
-    @Test
-    void divide() {
-        // assertNull() and assertNotNull()
-        assertNull(calculator.divide(2,null));
-
-        assertNotNull(calculator.divide(2,3));
-
-        // assertEquals() and assertNotEquals()
-        assertEquals(1,calculator.divide(5,5));
-
-        assertNotEquals(90,calculator.divide(9,10));
-
-        // assertTrue() and assertFalse()
-        assertTrue(calculator.divide(2,3)<1);
-
-        assertFalse(calculator.divide(0,1)<-1);
-
-        assertThrows(Exception.class,()->calculator.divide(1,0));
-
-        assertDoesNotThrow(()->calculator.divide(1,10));
-    }
-
-    @Test
-    void array(){
-        // assertArrayEquals()
-        assertArrayEquals(new int[]{1,2,3},calculator.array());
-    }
-
-    @Test
-    void checkArray(){
-        // assertSame()
-        Calculator c1;
-        c1 = calculator;
-        assertSame(c1,calculator);
-
-        List<String> str1 = Arrays.asList("1","2");
-        List<String> str2 = Arrays.asList("1","2");
-        // assertLinesMatch()
-        assertLinesMatch(str1,str2);
-
-        //  assertTimeout()
-        assertTimeout(Duration.ofMillis(10),()->{
-            Thread.sleep(1);
-            calculator.add(1,2);
-        });
-    }
-
     @RepeatedTest(value = 5)
     void generate(){
         int mn = 1;
         int mx = 10;
         int generating = calculator.generate(mn,mx);
 
-        assertEquals(0,Math.random());
+        assertEquals(generating,Math.random());
     }
 
 }
